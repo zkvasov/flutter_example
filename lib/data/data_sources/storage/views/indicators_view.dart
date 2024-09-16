@@ -1,8 +1,9 @@
 import 'package:drift/drift.dart';
-import 'package:flutter_example/data/data_sources/storage/tables/users/addresses_table.dart';
-import 'package:flutter_example/data/data_sources/storage/tables/users/companies_table.dart';
-import 'package:flutter_example/data/data_sources/storage/tables/users/geos_table.dart';
-import 'package:flutter_example/data/data_sources/storage/tables/users/users_table.dart';
+
+import '../tables/users/addresses_table.dart';
+import '../tables/users/companies_table.dart';
+import '../tables/users/geos_table.dart';
+import '../tables/users/users_table.dart';
 
 abstract class IndicatorsView extends View {
   Users get users;
@@ -11,7 +12,7 @@ abstract class IndicatorsView extends View {
   Companies get companies;
 
   @override
-  Query as() => select([
+  Query<HasResultSet, dynamic> as() => select([
         users.id,
         users.name,
         users.username,

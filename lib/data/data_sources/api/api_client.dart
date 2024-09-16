@@ -7,10 +7,8 @@ import '../models/users/user_dto.dart';
 class ApiClient extends BaseApiClient {
   ApiClient(super.dio);
 
-  Future<List<UserDto>> getUsers() async {
-    return await getList<UserDto>(
-      path: '/users',
-      converter: UserDto.fromJson,
-    );
-  }
+  Future<List<UserDto>> getUsers() async => getList<UserDto>(
+        path: '/users',
+        converter: UserDto.fromJson,
+      );
 }

@@ -1,9 +1,9 @@
 import 'package:drift/drift.dart';
 import 'package:injectable/injectable.dart';
-import 'package:flutter_example/data/data_sources/storage/local_storage.dart';
-import 'package:flutter_example/data/data_sources/storage/tables/auth/user_session_table.dart';
 
 import '../../models/auth/user_session_dto.dart';
+import '../local_storage.dart';
+import '../tables/auth/user_session_table.dart';
 
 part 'user_session_dao.g.dart';
 
@@ -15,13 +15,14 @@ class UserSessionDao extends DatabaseAccessor<LocalStorage>
 
   Future<void> insertSession(UserSessionDto session) async {
     await userSessionTable.deleteAll();
-    userSessionTable.insertOnConflictUpdate(UserSessionTableCompanion.insert(
-      email: session.email,
-      password: session.password,
-    ));
+    await userSessionTable.insertOnConflictUpdate(
+      UserSessionTableCompanion.insert(
+        email: session.email,
+        password: session.password,
+      ),
+    );
   }
 
-  Future<UserSessionDto?> getSession() {
-    return select(userSessionTable).getSingleOrNull();
-  }
+  Future<UserSessionDto?> getSession() =>
+      select(userSessionTable).getSingleOrNull();
 }

@@ -1,5 +1,6 @@
 import 'package:drift/drift.dart';
-import 'package:flutter_example/data/data_sources/storage/tables/users/geos_table.dart';
+
+import 'geos_table.dart';
 
 @DataClassName('AddressInsertData')
 class Addresses extends Table {

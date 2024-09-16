@@ -131,7 +131,12 @@ class TaggedLogger implements Logger {
   bool isClosed() => false;
 
   @override
-  void t(message, {DateTime? time, Object? error, StackTrace? stackTrace}) {
+  void t(
+    dynamic message, {
+    DateTime? time,
+    Object? error,
+    StackTrace? stackTrace,
+  }) {
     log(
       Level.trace,
       message,
@@ -142,7 +147,12 @@ class TaggedLogger implements Logger {
   }
 
   @override
-  void wtf(message, {DateTime? time, Object? error, StackTrace? stackTrace}) {
+  void wtf(
+    dynamic message, {
+    DateTime? time,
+    Object? error,
+    StackTrace? stackTrace,
+  }) {
     log(
       Level.fatal,
       message,
@@ -153,7 +163,5 @@ class TaggedLogger implements Logger {
   }
 
   @override
-  Future<void> get init {
-    return Logger().init;
-  }
+  Future<void> get init => Logger().init;
 }

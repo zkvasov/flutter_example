@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_example/di/di.dart';
 
+import 'di/di.dart';
 import 'presentation/core/router/app_auto_router.dart';
 
 Future<void> main() async {

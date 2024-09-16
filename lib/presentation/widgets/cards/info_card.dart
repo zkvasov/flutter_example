@@ -11,22 +11,20 @@ class InfoCard extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
-    return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Text.rich(TextSpan(
-          children: [
-            TextSpan(
-              text: '$label: ',
-              style: const TextStyle(fontWeight: FontWeight.bold),
-            ),
-            TextSpan(
-              text: info,
-            ),
-          ],
-        )),
-      ),
-    );
-  }
+  Widget build(BuildContext context) => Card(
+        child: Padding(
+          padding: const EdgeInsets.all(8),
+          child: Text.rich(TextSpan(
+            children: [
+              TextSpan(
+                text: '$label: ',
+                style: const TextStyle(fontWeight: FontWeight.bold),
+              ),
+              TextSpan(
+                text: info,
+              ),
+            ],
+          )),
+        ),
+      );
 }

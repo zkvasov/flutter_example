@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_example/domain/core/helpers/tagged_logger.dart';
 import 'package:logger/logger.dart';
 
 import '../../../di/di.dart';
@@ -12,6 +11,7 @@ import '../../../domain/core/error/models/exceptions/application_exception.dart'
 import '../../../domain/core/error/models/exceptions/base_exception.dart';
 import '../../../domain/core/error/models/exceptions/lost_connection_exception.dart';
 import '../../../domain/core/error/models/lost_connection_type.dart';
+import '../../../domain/core/helpers/tagged_logger.dart';
 
 abstract class BaseRepository {
   Logger get logger => sl<Logger>().of(this);

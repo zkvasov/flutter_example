@@ -1,12 +1,12 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_example/di/di.dart';
-import 'package:flutter_example/domain/core/helpers/tagged_logger.dart';
 import 'package:logger/logger.dart';
 
+import '../../../di/di.dart';
 import '../../../domain/core/error/models/exceptions/api_exception.dart';
 import '../../../domain/core/error/models/exceptions/lost_connection_exception.dart';
+import '../../../domain/core/helpers/tagged_logger.dart';
 
 abstract class BaseCubit<TState> extends Cubit<TState> {
   BaseCubit(super.initialState);

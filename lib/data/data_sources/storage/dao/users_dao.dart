@@ -1,15 +1,15 @@
 import 'package:drift/drift.dart';
 import 'package:injectable/injectable.dart';
-import 'package:flutter_example/data/data_sources/models/users/address_dto.dart';
-import 'package:flutter_example/data/data_sources/models/users/company_dto.dart';
-import 'package:flutter_example/data/data_sources/models/users/geo_dto.dart';
-import 'package:flutter_example/data/data_sources/storage/local_storage.dart';
-import 'package:flutter_example/data/data_sources/storage/tables/users/addresses_table.dart';
-import 'package:flutter_example/data/data_sources/storage/tables/users/companies_table.dart';
-import 'package:flutter_example/data/data_sources/storage/tables/users/geos_table.dart';
-import 'package:flutter_example/data/data_sources/storage/tables/users/users_table.dart';
 
+import '../../models/users/address_dto.dart';
+import '../../models/users/company_dto.dart';
+import '../../models/users/geo_dto.dart';
 import '../../models/users/user_dto.dart';
+import '../local_storage.dart';
+import '../tables/users/addresses_table.dart';
+import '../tables/users/companies_table.dart';
+import '../tables/users/geos_table.dart';
+import '../tables/users/users_table.dart';
 import '../views/indicators_view.dart';
 
 part 'users_dao.g.dart';
@@ -74,53 +74,45 @@ class UsersDao extends DatabaseAccessor<LocalStorage> with _$UsersDaoMixin {
 }
 
 extension on GeoDto {
-  GeosCompanion toInsertGeo() {
-    return GeosCompanion.insert(
-      lat: lat,
-      lng: lng,
-    );
-  }
+  GeosCompanion toInsertGeo() => GeosCompanion.insert(
+        lat: lat,
+        lng: lng,
+      );
 }
 
 extension on AddressDto {
-  AddressesCompanion toInsertAddress(int geoId) {
-    return AddressesCompanion.insert(
-      street: street,
-      suite: suite,
-      city: city,
-      zipcode: zipcode,
-      geoId: geoId,
-    );
-  }
+  AddressesCompanion toInsertAddress(int geoId) => AddressesCompanion.insert(
+        street: street,
+        suite: suite,
+        city: city,
+        zipcode: zipcode,
+        geoId: geoId,
+      );
 }
 
 extension on CompanyDto {
-  CompaniesCompanion toInsertCompany() {
-    return CompaniesCompanion.insert(
-        name: name, catchPhrase: catchPhrase, bs: bs);
-  }
+  CompaniesCompanion toInsertCompany() =>
+      CompaniesCompanion.insert(name: name, catchPhrase: catchPhrase, bs: bs);
 }
 
 extension _UserExt on UserDto {
-  static UserDto fromIndicatorsViewData(IndicatorsViewData view) {
-    return UserDto(
-      id: view.id,
-      name: view.name,
-      username: view.username,
-      email: view.email,
-      address: AddressDto(
-          street: view.street,
-          suite: view.suite,
-          city: view.city,
-          zipcode: view.zipcode,
-          geo: GeoDto(lat: view.lat, lng: view.lng)),
-      phone: view.phone,
-      website: view.website,
-      company: CompanyDto(
-        name: view.name1,
-        catchPhrase: view.catchPhrase,
-        bs: view.bs,
-      ),
-    );
-  }
+  static UserDto fromIndicatorsViewData(IndicatorsViewData view) => UserDto(
+        id: view.id,
+        name: view.name,
+        username: view.username,
+        email: view.email,
+        address: AddressDto(
+            street: view.street,
+            suite: view.suite,
+            city: view.city,
+            zipcode: view.zipcode,
+            geo: GeoDto(lat: view.lat, lng: view.lng)),
+        phone: view.phone,
+        website: view.website,
+        company: CompanyDto(
+          name: view.name1,
+          catchPhrase: view.catchPhrase,
+          bs: view.bs,
+        ),
+      );
 }

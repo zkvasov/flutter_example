@@ -7,10 +7,8 @@ import '../../data/core/api/interceptors/api_log_interceptor.dart';
 @module
 abstract class ApiModule {
   @lazySingleton
-  Dio apiDio() {
-    return Dio()
-      ..options.sendTimeout = const Duration(seconds: 10)
-      ..options.baseUrl = ApiConstants.baseUrl
-      ..interceptors.add(ApiLogInterceptor());
-  }
+  Dio apiDio() => Dio()
+    ..options.sendTimeout = const Duration(seconds: 10)
+    ..options.baseUrl = ApiConstants.baseUrl
+    ..interceptors.add(ApiLogInterceptor());
 }

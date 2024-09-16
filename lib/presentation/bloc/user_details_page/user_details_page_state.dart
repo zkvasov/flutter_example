@@ -30,11 +30,10 @@ class UserDetailsPageState extends Equatable {
     required UserDetailsPageStatus status,
     String? errorMessage,
     User? user,
-  }) {
-    return UserDetailsPageState(
-      status: status,
-      errorMessage: errorMessage ?? this.errorMessage,
-      user: user ?? this.user,
-    );
-  }
+  }) =>
+      UserDetailsPageState(
+        status: status,
+        errorMessage: errorMessage ?? this.errorMessage,
+        user: user ?? this.user,
+      );
 }

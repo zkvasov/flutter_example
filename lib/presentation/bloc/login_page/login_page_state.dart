@@ -26,10 +26,9 @@ class LoginPageState extends Equatable {
     required LoginPageStatus status,
     String? errorMessage,
     bool? buttonEnabled,
-  }) {
-    return LoginPageState(
-      status: status,
-      errorMessage: errorMessage ?? this.errorMessage,
-    );
-  }
+  }) =>
+      LoginPageState(
+        status: status,
+        errorMessage: errorMessage ?? this.errorMessage,
+      );
 }

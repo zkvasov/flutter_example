@@ -23,12 +23,10 @@ class LoginPage extends StatefulWidget implements AutoRouteWrapper {
   State<LoginPage> createState() => _LoginPageState();
 
   @override
-  Widget wrappedRoute(BuildContext context) {
-    return BlocProvider(
-      create: (context) => sl<LoginPageCubit>(),
-      child: this,
-    );
-  }
+  Widget wrappedRoute(BuildContext context) => BlocProvider(
+        create: (context) => sl<LoginPageCubit>(),
+        child: this,
+      );
 }
 
 class _LoginPageState extends State<LoginPage> {
@@ -38,9 +36,10 @@ class _LoginPageState extends State<LoginPage> {
 
   void _onLoginTap() {
     if (_fbKey.currentState?.saveAndValidate() ?? false) {
-      final email = _fbKey.currentState?.value[_LoginPageFields.email.name];
+      final email =
+          _fbKey.currentState?.value[_LoginPageFields.email.name] as String;
       final password =
-          _fbKey.currentState?.value[_LoginPageFields.password.name];
+          _fbKey.currentState?.value[_LoginPageFields.password.name] as String;
 
       _cubit.login(email: email, password: password);
     }
@@ -53,63 +52,62 @@ class _LoginPageState extends State<LoginPage> {
     switch (state.status) {
       case LoginPageStatus.error:
         AppToasts.of(context).showError(state.errorMessage);
-        break;
+        return;
       case LoginPageStatus.success:
         router.replaceToUsersPage();
-      default:
-        return;
+        break;
+      case LoginPageStatus.idle:
+      case LoginPageStatus.loading:
+        break;
     }
   }
 
   @override
-  Widget build(BuildContext context) {
-    return BlocConsumer<LoginPageCubit, LoginPageState>(
-      listener: _onStateChanged,
-      builder: (context, state) {
-        if (state.status == LoginPageStatus.loading) {
-          return const AppLoader();
-        }
+  Widget build(BuildContext context) =>
+      BlocConsumer<LoginPageCubit, LoginPageState>(
+        listener: _onStateChanged,
+        builder: (context, state) {
+          if (state.status == LoginPageStatus.loading) {
+            return const AppLoader();
+          }
 
-        return Scaffold(
-          appBar: AppBar(
-            title: const Text('Login'),
-          ),
-          body: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: FormBuilder(
-              key: _fbKey,
-              child: _buildBody(),
+          return Scaffold(
+            appBar: AppBar(
+              title: const Text('Login'),
+            ),
+            body: Padding(
+              padding: const EdgeInsets.all(16),
+              child: FormBuilder(
+                key: _fbKey,
+                child: _buildBody(),
+              ),
+            ),
+          );
+        },
+      );
+
+  Widget _buildBody() => Column(
+        children: [
+          FormBuilderTextField(
+            name: _LoginPageFields.email.name,
+            validator: FormBuilderValidators.required(),
+            decoration: const InputDecoration(
+              label: Text('Login'),
             ),
           ),
-        );
-      },
-    );
-  }
-
-  Widget _buildBody() {
-    return Column(
-      children: [
-        FormBuilderTextField(
-          name: _LoginPageFields.email.name,
-          validator: FormBuilderValidators.required(),
-          decoration: const InputDecoration(
-            label: Text('Login'),
+          const SizedBox(height: 16),
+          FormBuilderTextField(
+            name: _LoginPageFields.password.name,
+            validator: FormBuilderValidators.required(),
+            decoration: const InputDecoration(
+              label: Text('Password'),
+            ),
           ),
-        ),
-        const SizedBox(height: 16),
-        FormBuilderTextField(
-          name: _LoginPageFields.password.name,
-          validator: FormBuilderValidators.required(),
-          decoration: const InputDecoration(
-            label: Text('Password'),
-          ),
-        ),
-        const SizedBox(height: 16),
-        ElevatedButton(
-          onPressed: _onLoginTap,
-          child: const Text('Login'),
-        )
-      ],
-    );
-  }
+          const SizedBox(height: 16),
+          ElevatedButton(
+            onPressed: _onLoginTap,
+            child: const Text('Login'),
+          )
+        ],
+      );
 }

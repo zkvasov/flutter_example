@@ -1,7 +1,7 @@
 import 'package:injectable/injectable.dart';
-import 'package:flutter_example/domain/repositories/auth_repository.dart';
 
 import '../../entities/auth/user_session.dart';
+import '../../repositories/auth_repository.dart';
 
 @lazySingleton
 class GetUserSessionUseCase {
@@ -9,7 +9,5 @@ class GetUserSessionUseCase {
 
   GetUserSessionUseCase(this._authRepository);
 
-  Future<UserSession?> call() {
-    return _authRepository.getUserSession();
-  }
+  Future<UserSession?> call() => _authRepository.getUserSession();
 }

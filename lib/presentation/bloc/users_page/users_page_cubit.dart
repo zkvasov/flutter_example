@@ -27,13 +27,11 @@ class UsersPageCubit extends BaseCubit<UsersPageState> {
     ));
   }
 
-  Future<void> _init() {
-    return makeErrorHandledCall(() async {
-      final users = await _getUsersUseCase.call();
-      emit(state.copyWith(
-        status: UsersPageStatus.success,
-        users: users,
-      ));
-    });
-  }
+  Future<void> _init() => makeErrorHandledCall(() async {
+        final users = await _getUsersUseCase.call();
+        emit(state.copyWith(
+          status: UsersPageStatus.success,
+          users: users,
+        ));
+      });
 }

@@ -21,7 +21,7 @@ abstract class BaseApiClient {
       queryParameters: requestData?.toJson(),
     );
 
-    return converter(response.data);
+    return converter(response.data as Map<String, dynamic>);
   }
 
   @protected
@@ -35,9 +35,9 @@ abstract class BaseApiClient {
       queryParameters: requestData?.toJson(),
     );
 
-    final value = List.from(response.data).map((dynamic item) {
-      return converter(item as Map<String, dynamic>);
-    }).toList();
+    final value = List.from(response.data as List)
+        .map((item) => converter(item as Map<String, dynamic>))
+        .toList();
     return value;
   }
 }

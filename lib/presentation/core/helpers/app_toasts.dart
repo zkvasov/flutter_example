@@ -36,40 +36,37 @@ class _ToastView extends StatelessWidget {
   final Color backgroundColor;
 
   const _ToastView({
-    super.key,
     required this.backgroundColor,
     required this.message,
   });
 
   @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(
-        horizontal: 24,
-        vertical: 16,
-      ),
-      decoration: BoxDecoration(
-        color: backgroundColor,
-        borderRadius: const BorderRadius.all(
-          Radius.circular(4),
+  Widget build(BuildContext context) => Container(
+        padding: const EdgeInsets.symmetric(
+          horizontal: 24,
+          vertical: 16,
         ),
-      ),
-      child: Row(
-        children: [
-          Expanded(
-            child: Text(
-              message,
-              style: const TextStyle(
-                fontSize: 14,
-                color: Colors.white,
-              ),
-              maxLines: 5,
-              textAlign: TextAlign.center,
-              overflow: TextOverflow.ellipsis,
-            ),
+        decoration: BoxDecoration(
+          color: backgroundColor,
+          borderRadius: const BorderRadius.all(
+            Radius.circular(4),
           ),
-        ],
-      ),
-    );
-  }
+        ),
+        child: Row(
+          children: [
+            Expanded(
+              child: Text(
+                message,
+                style: const TextStyle(
+                  fontSize: 14,
+                  color: Colors.white,
+                ),
+                maxLines: 5,
+                textAlign: TextAlign.center,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
+          ],
+        ),
+      );
 }

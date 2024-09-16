@@ -5,7 +5,7 @@ import 'app_auto_router.gr.dart';
 
 const _durationInMilliseconds = 300;
 
-class _AppRoute extends CustomRoute {
+class _AppRoute<R> extends CustomRoute<R> {
   _AppRoute({
     required super.page,
     required super.path,

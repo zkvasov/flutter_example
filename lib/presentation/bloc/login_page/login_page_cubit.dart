@@ -30,29 +30,26 @@ class LoginPageCubit extends BaseCubit<LoginPageState> {
     ));
   }
 
-  Future<void> _init() {
-    return makeErrorHandledCall(() async {
-      final session = await _getUserSessionUseCase.call();
-      if (session == null) {
-        emit(state.copyWith(status: LoginPageStatus.idle));
-      } else {
-        emit(state.copyWith(status: LoginPageStatus.success));
-      }
-    });
-  }
+  Future<void> _init() => makeErrorHandledCall(() async {
+        final session = await _getUserSessionUseCase.call();
+        if (session == null) {
+          emit(state.copyWith(status: LoginPageStatus.idle));
+        } else {
+          emit(state.copyWith(status: LoginPageStatus.success));
+        }
+      });
 
   Future<void> login({
     required String email,
     required String password,
-  }) {
-    return makeErrorHandledCall(() async {
-      await _loginUseCase.call(
-        UserSession(
-          email: email,
-          password: password,
-        ),
-      );
-      emit(state.copyWith(status: LoginPageStatus.success));
-    });
-  }
+  }) =>
+      makeErrorHandledCall(() async {
+        await _loginUseCase.call(
+          UserSession(
+            email: email,
+            password: password,
+          ),
+        );
+        emit(state.copyWith(status: LoginPageStatus.success));
+      });
 }

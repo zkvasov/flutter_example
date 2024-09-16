@@ -1,6 +1,6 @@
 import 'package:injectable/injectable.dart';
-import 'package:flutter_example/domain/entities/users/user.dart';
 
+import '../../entities/users/user.dart';
 import '../../repositories/users_repository.dart';
 
 @lazySingleton
@@ -9,7 +9,5 @@ class GetUserDetailsUseCase {
 
   GetUserDetailsUseCase(this._usersRepository);
 
-  Future<User> call(int userId) {
-    return _usersRepository.getUserDetails(userId);
-  }
+  Future<User> call(int userId) => _usersRepository.getUserDetails(userId);
 }

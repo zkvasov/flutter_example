@@ -10,7 +10,5 @@ class ApiException implements BaseException {
   });
 
   @override
-  String toString() {
-    return message;
-  }
+  String toString() => message;
 }

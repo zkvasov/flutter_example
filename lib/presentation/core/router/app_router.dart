@@ -1,6 +1,6 @@
 import 'package:injectable/injectable.dart';
-import 'package:flutter_example/di/di.dart';
 
+import '../../../di/di.dart';
 import 'app_auto_router.dart';
 import 'app_auto_router.gr.dart';
 import 'base_router.dart';
