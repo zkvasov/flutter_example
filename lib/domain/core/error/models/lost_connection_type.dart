@@ -1,0 +1,4 @@
+enum LostConnectionType {
+  noInternetConnection,
+  noServerConnect,
+}
