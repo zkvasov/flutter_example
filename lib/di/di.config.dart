@@ -59,25 +59,27 @@ _i174.GetIt $configDI(
       () => repositoriesModule.usersRepositoryImpl());
   gh.lazySingleton<_i361.Dio>(() => apiModule.apiDio());
   gh.lazySingleton<_i290.ApiLogInterceptor>(() => _i290.ApiLogInterceptor());
-  gh.lazySingleton<_i868.GetUsersUseCase>(
-      () => _i868.GetUsersUseCase(gh<_i56.UsersRepository>()));
-  gh.lazySingleton<_i670.GetUserDetailsUseCase>(
-      () => _i670.GetUserDetailsUseCase(gh<_i56.UsersRepository>()));
+  gh.singleton<_i223.AppRouter>(
+      () => _i223.AppRouter(gh<_i242.AppAutoRouter>()));
   gh.singleton<_i30.ApiClient>(() => _i30.ApiClient(gh<_i361.Dio>()));
-  gh.lazySingleton<_i132.LoginUseCase>(
-      () => _i132.LoginUseCase(gh<_i800.AuthRepository>()));
-  gh.lazySingleton<_i267.GetUserSessionUseCase>(
-      () => _i267.GetUserSessionUseCase(gh<_i800.AuthRepository>()));
   gh.lazySingleton<_i867.UsersDao>(
       () => _i867.UsersDao(gh<_i1022.LocalStorage>()));
   gh.lazySingleton<_i657.UserSessionDao>(
       () => _i657.UserSessionDao(gh<_i1022.LocalStorage>()));
+  gh.lazySingleton<_i132.LoginUseCase>(
+      () => _i132.LoginUseCase(gh<_i800.AuthRepository>()));
+  gh.lazySingleton<_i267.GetUserSessionUseCase>(
+      () => _i267.GetUserSessionUseCase(gh<_i800.AuthRepository>()));
+  gh.lazySingleton<_i868.GetUsersUseCase>(
+      () => _i868.GetUsersUseCase(gh<_i56.UsersRepository>()));
+  gh.lazySingleton<_i670.GetUserDetailsUseCase>(
+      () => _i670.GetUserDetailsUseCase(gh<_i56.UsersRepository>()));
+  gh.factory<_i865.UsersPageCubit>(
+      () => _i865.UsersPageCubit(gh<_i868.GetUsersUseCase>()));
   gh.factory<_i86.LoginPageCubit>(() => _i86.LoginPageCubit(
         gh<_i267.GetUserSessionUseCase>(),
         gh<_i132.LoginUseCase>(),
       ));
-  gh.factory<_i865.UsersPageCubit>(
-      () => _i865.UsersPageCubit(gh<_i868.GetUsersUseCase>()));
   gh.factoryParam<_i909.UserDetailsPageCubit, int, dynamic>((
     _userId,
     _,
@@ -86,8 +88,6 @@ _i174.GetIt $configDI(
         gh<_i670.GetUserDetailsUseCase>(),
         _userId,
       ));
-  gh.singleton<_i223.AppRouter>(
-      () => _i223.AppRouter(gh<_i242.AppAutoRouter>()));
   return getIt;
 }
 
